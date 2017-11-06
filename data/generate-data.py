@@ -3,6 +3,7 @@
 import random
 import sys
 import math
+import copy
 
 usage="""
 ./generate-data.py <size>
@@ -24,16 +25,36 @@ Generate non repeating list of random numbers. This is slow and an infinite
 loop if size > max_value.
 """
 s=set()
-while len(s) < math.floor(size/sparsity/2):
+while len(s) < math.floor(size/sparsity/2): # assume this is reasonable
     s.add(random.randint(min_value, max_value))
 
-odd_value=s.pop()
+"""
+Choose the special numbers.
+"""
+odd_value=random.choice(list(s))
+odd_index=random.randint(0, len(s)-1)
+
+#print "odd_value: "+str(odd_value)
 
 """
-Dump out elements 
+Make a list of sets.
 """
-print(str(odd_value))
-for run in range(1,int(sparsity)*2):
-    for i in s:
-        print(str(i))
-    print(str(odd_value))
+data=list()
+for i in range(0, sparsity*2):
+    data.append(copy.copy(s))
+
+"""
+Barf it out whilst keeping some track of things. Not exactly random but not 
+really predictable either.
+"""
+counter=0
+while len(data) > 0:
+    current_set=random.choice(data)
+    if(len(current_set) == 0):
+        data.remove(current_set)
+    else:
+        print(current_set.pop())
+        counter=counter+1
+        if counter == odd_index:
+            print odd_value
+    
