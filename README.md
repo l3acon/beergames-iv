@@ -5,5 +5,8 @@ I came across this comment on reddit about an amazon interview question.
 
 Per usual make your own directory in this repo, submit a pull request. 
 
+## Performance
+I'll be going for real-world performance on ~GB input size. You do you.
+
 ---
 credit to [/u/goodDayM's comment](https://www.reddit.com/r/programming/comments/7axkvv/wellcapitalized_seattle_startup_seeks_unix/dpdqt6h/)
